@@ -5,6 +5,22 @@ import java.util.ArrayList;
 public class Estoque {
 	
 	private static ArrayList<Livro> livros;
+	private static Estoque estoque;
+	
+	private Estoque() {
+		livros = new ArrayList<Livro>(0);
+	}
+	
+	/**
+	 * Devolve a única instância de estoque do sistema.
+	 * @return Estoque 
+	 */
+	public static Estoque getInstance() {
+		if (estoque == null) {
+			estoque = new Estoque();
+		} 
+		return estoque;
+	}
 	
 	/**
 	 * Add um livro ao estoque.
@@ -12,6 +28,7 @@ public class Estoque {
 	 * @return boolean true, se add com sucesso; false, do contrário.
 	 */
 	public static boolean addLivro(Livro livro) {
+		Estoque.livros.add(livro);
 		//TODO: implementar conforme requisitos.
 		return false;
 	}

@@ -5,9 +5,7 @@ package livraria.model;
  *
  */
 public class Livro {
-	
-	//TODO: implementar composicao com a classe Estoque.
-	
+		
 	private String isbn;
 	private String titulo;
 	private String autor;
@@ -24,7 +22,11 @@ public class Livro {
 		this.titulo = titulo;
 		this.autor = autor;
 		this.editora = editora;
+		Estoque.addLivro(this);
 	}
+	
+	
+	
 	/**
 	 * @return the isbn
 	 */
