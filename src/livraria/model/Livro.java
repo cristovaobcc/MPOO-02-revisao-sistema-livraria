@@ -10,21 +10,27 @@ public class Livro {
 	private String titulo;
 	private String autor;
 	private String editora;
-	/**
-	 * @param isbn
-	 * @param titulo
-	 * @param autor
-	 * @param editora
-	 */
-	public Livro(String isbn, String titulo, String autor, String editora) {
 		
+	
+	/**
+	 * Cria um livro e adiciona no estoque. Há uma composição de Livro
+	 * com Estoque, caso se configure paraCadastrar como true.
+	 * @param isbn String
+	 * @param titulo String
+	 * @param autor String
+	 * @param editora String
+	 * @param paraCadastrar boolean true, cadastra o livro no estoque. false não cadastra.
+	 */
+	public Livro(String isbn, String titulo, String autor, String editora, boolean paraCadastrar) {
+		
+		if (paraCadastrar) {
+			Estoque.addLivro(this); // Composição com livro
+		}
 		this.isbn = isbn;
 		this.titulo = titulo;
 		this.autor = autor;
 		this.editora = editora;
-		Estoque.addLivro(this);
 	}
-	
 	
 	
 	/**
@@ -117,4 +123,16 @@ public class Livro {
 		return "Livro [isbn=" + isbn + ", titulo=" + titulo + ", autor=" + autor + ", editora=" + editora + "]";
 	}
 	
+	/**
+	 * Devolve uma string com os dados de livro para impressão no console.
+	 * @return String 
+	 */
+	public String toStringToConsole() {
+		return String.format("%nLivro:%n"
+				+ "Título: %s%n"
+				+ "Autor: %s%n"
+				+ "Editora: %s%n"
+				+ "ISBN: %s%n", 
+				titulo, autor, editora, isbn);
+	}
 }

@@ -6,8 +6,7 @@ import java.util.ArrayList;
 public class Estoque {
 	
 	private static ArrayList<Livro> livros = new ArrayList<Livro>();
-	private static Estoque estoque;
-	
+		
 	
 	/**
 	 * Add um livro ao estoque.
@@ -36,7 +35,7 @@ public class Estoque {
 	 */
 	public static boolean existeLivro(Livro livro) {
 		for (Livro livroAtual : livros) {
-			if (livroAtual.getAutor().equalsIgnoreCase(livro.getAutor().toLowerCase()) ||
+			if (livroAtual.getAutor().equalsIgnoreCase(livro.getAutor().toLowerCase()) &&
 					livroAtual
 					.getTitulo().compareToIgnoreCase(livro.getTitulo().toLowerCase()) == 0) {
 				return true;
@@ -88,7 +87,7 @@ public class Estoque {
 	 * Devolve um ArrayList de livros cadastrados no estoque.
 	 * @return ArrayList<Livro>
 	 */
-	public ArrayList<Livro> getLivros() {
+	public static ArrayList<Livro> getLivros() {
 		return livros;
 	}
 	
