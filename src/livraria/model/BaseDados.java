@@ -10,8 +10,47 @@ import java.util.ArrayList;
  *
  */
 public class BaseDados {
+	// TODO: criar exceções para essa classe. Por exemplo: getCliente pode lança exceção.
+	
 	private static ArrayList<Cliente> clientes;
 	
-	//TODO: implementar conforme requisitos.
+	/**
+	 * Adiciona o cliente na base de dados.
+	 * @param cliente Cliente
+	 * @return boolean true, se add com sucesso; false, do contrário.
+	 */
+	public static boolean addCliente(Cliente cliente) {
+		return clientes.add(cliente);
+	}
+	
+	/**
+	 * Obtém um cliente cadastrado na base de dados.
+	 * @param cliente Cliente buscado
+	 * @return Cliente
+	 */
+	public static Cliente getCliente(Cliente cliente) {
+		int index = clientes.indexOf(cliente);
+		return clientes.get(index);
+	}
+	
+	/**
+	 * Atualiza os dados de um cliente conforme o cliente do parametro.
+	 * @param Cliente cliente 
+	 * @return 
+	 */
+	public static boolean updateCliente(Cliente cliente) {
+		int index = clientes.indexOf(cliente);
+		Cliente clienteReposto = clientes.set(index, cliente);
+		return clienteReposto != null ? true : false;
+	}
+	
+	/**
+	 * Remove um cliente passado no parametro.
+	 * @param cliente Cliente
+	 * @return boolean true, se add com sucesso; false, do contrário.
+	 */
+	public static boolean removeCliente(Cliente cliente) {
+		return clientes.remove(cliente);
+	}
 	
 }
