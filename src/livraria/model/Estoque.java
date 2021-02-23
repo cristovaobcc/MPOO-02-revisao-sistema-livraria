@@ -2,6 +2,7 @@ package livraria.model;
 
 import java.util.ArrayList;
 
+
 public class Estoque {
 	
 	private static ArrayList<Livro> livros;
@@ -28,9 +29,7 @@ public class Estoque {
 	 * @return boolean true, se add com sucesso; false, do contrário.
 	 */
 	public static boolean addLivro(Livro livro) {
-		Estoque.livros.add(livro);
-		//TODO: implementar conforme requisitos.
-		return false;
+		return Estoque.livros.add(livro);
 	}
 	
 	/**
@@ -39,8 +38,8 @@ public class Estoque {
 	 * @return boolean true, se removido com sucesso; false, do contrário.
 	 */
 	public static boolean removerLivro(Livro livro) {
-		//TODO: implementar conforme requisitos.
-		return false;
+				
+		return livros.remove(livro);
 	}
 	
 	/**
@@ -50,17 +49,31 @@ public class Estoque {
 	 * @return boolean true, se existe; false, do contrário.
 	 */
 	public static boolean existeLivro(Livro livro) {
-		//TODO: implementar conforme requisitos.
+		for (Livro livroAtual : livros) {
+			if (livroAtual.getAutor().equalsIgnoreCase(livro.getAutor().toLowerCase()) ||
+					livroAtual
+					.getTitulo().compareToIgnoreCase(livro.getTitulo().toLowerCase()) == 0) {
+				return true;
+			} 
+		}
+		
 		return false;
+		
 	}
 	
 	/**
-	 * 
-	 * @param livro
+	 * Devolve um livro buscado, caso exista. Do contrário, devolve null.
+	 * @param livro Livro buscado
 	 * @return Livro
 	 */
 	public static Livro buscarLivro(Livro livro) {
-		//TODO: implementar conforme requisitos.
+		if (existeLivro(livro)) {
+			for (Livro livroAtual : livros) {
+				if (livroAtual.equals(livro)) {
+					return livroAtual;
+				}
+			}
+		}
 		return null;
 	}
 	
@@ -71,9 +84,17 @@ public class Estoque {
 	 * @return Integer 
 	 */
 	public static Integer quantidadeLivro(Livro livro) {
+		int qtde = 0;
 		
-		//TODO: implementar conforme requisitos.
-		return 0;
+		if (existeLivro(livro)) {
+			for (Livro livroAtual : livros) {
+				if (livroAtual.equals(livro)) {
+					qtde++;
+				}
+			}
+		}
+		
+		return qtde;
 	}
 	
 	
@@ -81,8 +102,25 @@ public class Estoque {
 	 * Devolve um ArrayList de livros cadastrados no estoque.
 	 * @return ArrayList<Livro>
 	 */
-	private static ArrayList<Livro> getLivros() {
-		//TODO: implementar conforme requisitos.
+	public ArrayList<Livro> getLivros() {
 		return livros;
 	}
+	
+	public static String exibirDados() {
+		StringBuilder livrosSB = new StringBuilder();
+		int qtde = 0;
+		String livroAtual;
+		for (Livro l : livros) {
+			qtde = quantidadeLivro(l);
+			livroAtual = String.format("Titulo: %s%n"
+					+ "Autor: %s%n"
+					+ "Editora: %s%n"
+					+ "ISBN: %s%n"
+					+ "Qtde: %03d%n", 
+					l.getTitulo(), l.getAutor(), l.getEditora(), l.getIsbn(), qtde);
+			livrosSB.append(livroAtual + "%n---%n");
+		}
+		return livrosSB.toString();
+	}
+	
 }
