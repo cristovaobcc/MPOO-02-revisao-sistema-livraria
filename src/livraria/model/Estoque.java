@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Estoque {
 	
-	private static ArrayList<Livro> livros;
+	private static ArrayList<Livro> livros = new ArrayList<Livro>();
 	private static Estoque estoque;
 	
 	private Estoque() {
@@ -106,7 +106,13 @@ public class Estoque {
 		return livros;
 	}
 	
+	/**
+	 * Exibe os dados dos livros de forma organizada para 
+	 * exibir na tela.
+	 * @return String
+	 */
 	public static String exibirDados() {
+		//TODO: corrigir a repetição de dados de livros.
 		StringBuilder livrosSB = new StringBuilder();
 		int qtde = 0;
 		String livroAtual;
@@ -116,9 +122,9 @@ public class Estoque {
 					+ "Autor: %s%n"
 					+ "Editora: %s%n"
 					+ "ISBN: %s%n"
-					+ "Qtde: %03d%n", 
+					+ "Qtde: %03d", 
 					l.getTitulo(), l.getAutor(), l.getEditora(), l.getIsbn(), qtde);
-			livrosSB.append(livroAtual + "%n---%n");
+			livrosSB.append(livroAtual + String.format("%n%n---%n%n"));
 		}
 		return livrosSB.toString();
 	}
