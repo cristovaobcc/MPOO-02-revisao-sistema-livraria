@@ -17,7 +17,7 @@ public class TestesApp {
 		Livro l3 = new Livro("124", "Wizard", "Baum", "Arts");
 		Livro l4 = new Livro("125", "I, robot", "Asimov", "Fuctures");
 		
-		Estoque estoque = Estoque.getInstance();
+		
 		
 		Estoque.addLivro(l1);
 		Estoque.addLivro(l2);
@@ -26,6 +26,8 @@ public class TestesApp {
 		
 		String dados = Estoque.exibirDados();
 		System.out.println(dados);
+		
+		// TODO: testar os outros métodos da classe Estoque.
 
 	}
 	

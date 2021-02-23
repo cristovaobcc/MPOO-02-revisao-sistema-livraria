@@ -8,20 +8,6 @@ public class Estoque {
 	private static ArrayList<Livro> livros = new ArrayList<Livro>();
 	private static Estoque estoque;
 	
-	private Estoque() {
-		livros = new ArrayList<Livro>(0);
-	}
-	
-	/**
-	 * Devolve a única instância de estoque do sistema.
-	 * @return Estoque 
-	 */
-	public static Estoque getInstance() {
-		if (estoque == null) {
-			estoque = new Estoque();
-		} 
-		return estoque;
-	}
 	
 	/**
 	 * Add um livro ao estoque.

@@ -14,7 +14,7 @@ public class App {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO: Fazer teste de models por aqui
+	
 
 	}
 
