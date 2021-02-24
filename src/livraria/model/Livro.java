@@ -33,6 +33,19 @@ public class Livro {
 	}
 	
 	
+	
+	
+	
+	/**
+	 * @param titulo
+	 * @param autor
+	 */
+	public Livro(String titulo, String autor) {
+		this.titulo = titulo;
+		this.autor = autor;
+	}
+
+
 	/**
 	 * @return the isbn
 	 */

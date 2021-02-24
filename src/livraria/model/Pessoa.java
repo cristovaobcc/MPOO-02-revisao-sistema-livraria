@@ -32,7 +32,10 @@ public abstract class Pessoa {
 		this.nome = nome;
 		this.cpf = cpf;
 	}
-
+	
+	/**
+	 * Hash code utilizando o CPF.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -41,6 +44,9 @@ public abstract class Pessoa {
 		return result;
 	}
 
+	/**
+	 * Equals utilizando o CPF.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

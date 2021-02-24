@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class BaseDados {
 	// TODO: criar exceções para essa classe. Por exemplo: getCliente pode lança exceção.
 	
-	private static ArrayList<Cliente> clientes;
+	private static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 	
 	/**
 	 * Adiciona o cliente na base de dados.

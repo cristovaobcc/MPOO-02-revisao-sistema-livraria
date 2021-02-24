@@ -16,16 +16,26 @@ public class Cliente extends Pessoa {
 	private Integer matricula;
 	
 	private ArrayList<Livro> livrosComprados;
+	
+	/**
+	 * 
+	 * @param cpf String
+	 */
+	public Cliente(String cpf) {
+		super("", cpf);
+
+	}
 
 	/**
 	 * 
-	 * @param nome
-	 * @param cpf
-	 * @param matricula
+	 * @param nome String
+	 * @param cpf String
+	 * @param matricula Integer
 	 */
 	public Cliente(String nome, String cpf, Integer matricula) {
 		super(nome, cpf);
 		this.matricula = matricula;
+		livrosComprados = new ArrayList<Livro>();
 	}
 
 	public Integer getMatricula() {
@@ -44,42 +54,7 @@ public class Cliente extends Pessoa {
 		this.livrosComprados = livrosComprados;
 	}
 	
-	/**
-	 * Faz o hashCode de matrícula e cpf.
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
-		return result;
-	}
 	
-	/**
-	 * Verifica a igualdade por cpf e matrícula.
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Cliente other = (Cliente) obj;
-		if (matricula == null) {
-			if (other.matricula != null) {
-				return false;
-			}
-		} else if (!matricula.equals(other.matricula)) {
-			return false;
-		}
-		return true;
-	}
-
 	@Override
 	public String toString() {
 		return "Cliente [matricula=" + matricula + ", toString()=" + super.toString() + "]";
