@@ -1,5 +1,6 @@
 package livraria.testes;
 
+import livraria.controller.Controller;
 import livraria.model.BaseDados;
 import livraria.model.Cliente;
 import livraria.model.Estoque;
@@ -32,6 +33,8 @@ public class TestesApp {
 		TelaVenda telaVenda = new TelaVenda(180, 150, "Venda");
 		
 		TelaEstoque telaEstoque = new TelaEstoque(150, 150, "Estoque");
+		
+		Controller controller = new Controller(telaMenu, telaCadastro, telaVenda, telaEstoque);
 
 	}
 	

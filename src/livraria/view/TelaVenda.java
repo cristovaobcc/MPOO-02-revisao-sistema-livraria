@@ -78,4 +78,36 @@ public class TelaVenda extends Tela {
 			
 	}
 
+
+	/**
+	 * @return the tituloTextField
+	 */
+	public JTextField getTituloTextField() {
+		return tituloTextField;
+	}
+
+
+
+	/**
+	 * @return the autorTextField
+	 */
+	public JTextField getAutorTextField() {
+		return autorTextField;
+	}
+
+	/**
+	 * @return the cpfTextField
+	 */
+	public JTextField getCpfTextField() {
+		return cpfTextField;
+	}
+
+
+	/**
+	 * @return the confirmarButton
+	 */
+	public JButton getConfirmarButton() {
+		return confirmarButton;
+	}
+
 }
