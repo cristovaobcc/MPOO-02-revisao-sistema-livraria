@@ -5,6 +5,11 @@ import livraria.model.Cliente;
 import livraria.model.Estoque;
 import livraria.model.Livro;
 import livraria.model.Transacao;
+import livraria.view.Tela;
+import livraria.view.TelaCadastro;
+import livraria.view.TelaEstoque;
+import livraria.view.TelaMenu;
+import livraria.view.TelaVenda;
 
 /**
  * Classe de testes do sistema.
@@ -17,7 +22,20 @@ public class TestesApp {
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		testeDeLivroEEstoque();
+		testeDeOutrosComponentesDoModel();
 		
+		Tela telaMenu = new TelaMenu(495, 75, "Menu");
+		
+		TelaCadastro telaCadastro = new TelaCadastro(240, 300, "Cadastro");
+		telaCadastro.setVisible(true);
+		
+		TelaVenda telaVenda = new TelaVenda(180, 150, "Venda");
+		
+		TelaEstoque telaEstoque = new TelaEstoque(150, 150, "Estoque");
+
+	}
+	
+	private static void testeDeOutrosComponentesDoModel() {
 		Livro l1 = new Livro("456", "1Q84 -  vol1", "Haruki Murakami", "Fucture", true);
 		l1 = new Livro("457", "Tsukuru Tazaki e seus anos de peregrinação", "Haruki Murakami", "Fucture", true);
 		
@@ -28,6 +46,7 @@ public class TestesApp {
 		
 		Cliente clienteAComprarLivro = new Cliente("123");
 		clienteAComprarLivro = BaseDados.getCliente(clienteAComprarLivro);
+		@SuppressWarnings("unused")
 		boolean vendido = Transacao.venda(clienteAComprarLivro, l1);
 		
 		clienteAComprarLivro = new Cliente("124");
@@ -41,8 +60,6 @@ public class TestesApp {
 		String dadosTransacoes = Transacao.exibirTransacoes();
 		System.out.println("------------------");
 		System.out.println(dadosTransacoes);
-		
-
 	}
 
 	private static void testeDeLivroEEstoque() {

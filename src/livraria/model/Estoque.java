@@ -41,6 +41,7 @@ public class Estoque {
 				
 				//livro = livroAtual; // Não funciona! Lembre que em java a passagem de parametros é por cópia!
 				livro.setIsbn(livroAtual.getIsbn()); // Aqui, de fato, acessamos o objeto na memória e o configuramos com uma variável da stack do método!
+				livro.setEditora(livroAtual.getEditora());
 				return true;
 			} 
 		}
