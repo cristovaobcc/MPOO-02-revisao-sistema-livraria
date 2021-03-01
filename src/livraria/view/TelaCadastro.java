@@ -46,7 +46,7 @@ public class TelaCadastro extends Tela {
 	
 	/**
 	 * Melhor tamanho observado para Linux app: 
-	 * Melhor tamanho observado para Windows app: TODO: ver o melhor tamanho
+	 * Melhor tamanho observado para Windows app: TODO: ver o melhor tamanho de resolução de tela
 	 * @param largura int
 	 * @param altura int
 	 * @param nome String

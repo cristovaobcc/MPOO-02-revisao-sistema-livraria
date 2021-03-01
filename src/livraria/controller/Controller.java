@@ -103,8 +103,7 @@ public class Controller implements ActionListener {
 	 * @return {@link Cliente}
 	 */
 	private Cliente carregaDadosPreenchidosDeCliente(TelaCadastro tela) {
-		// TODO: pensar numa implementação para a gerar numero de matricula do cliente.
-		return new Cliente(tela.getNomeTextField().getText(), tela.getCpfTextField().getText(), null);
+		return new Cliente(tela.getNomeTextField().getText(), tela.getCpfTextField().getText());
 	}
 	
 	/**

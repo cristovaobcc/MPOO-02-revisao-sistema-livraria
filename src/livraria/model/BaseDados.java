@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class BaseDados {
 	// TODO: criar exceções para essa classe. Por exemplo: getCliente pode lança exceção.
 	
+	private static int matricula = 0;	
 	private static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 	
 	/**
@@ -20,6 +21,7 @@ public class BaseDados {
 	 * @return boolean true, se add com sucesso; false, do contrário.
 	 */
 	public static boolean addCliente(Cliente cliente) {
+		cliente.setMatricula(++matricula);
 		return clientes.add(cliente);
 	}
 	
@@ -52,5 +54,13 @@ public class BaseDados {
 	public static boolean removeCliente(Cliente cliente) {
 		return clientes.remove(cliente);
 	}
+
+	/**
+	 * @return the matricula
+	 */
+	public static int getMatricula() {
+		return matricula;
+	}
+	
 	
 }

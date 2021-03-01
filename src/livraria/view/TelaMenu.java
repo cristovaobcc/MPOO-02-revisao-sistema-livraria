@@ -21,7 +21,7 @@ public class TelaMenu extends Tela {
 
 	/**
 	 * Melhor tamanho observado para Linux app: 495x75.
-	 * Melhor tamanho observado para Windows app: TODO: ver o melhor tamanho
+	 * Melhor tamanho observado para Windows app: TODO: ver o melhor tamanho de resolução de tela
 	 * @param largura
 	 * @param altura
 	 * @param nome

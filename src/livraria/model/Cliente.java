@@ -27,7 +27,7 @@ public class Cliente extends Pessoa {
 	}
 
 	/**
-	 * 
+	 * Cria um cliente com todos os parametros preenchidos.
 	 * @param nome String
 	 * @param cpf String
 	 * @param matricula Integer
@@ -36,6 +36,15 @@ public class Cliente extends Pessoa {
 		super(nome, cpf);
 		this.matricula = matricula;
 		livrosComprados = new ArrayList<Livro>();
+	}
+	
+	/**
+	 * Cria um cliente com matricula null.
+	 * @param nome String
+	 * @param cpf String
+	 */
+	public Cliente(String nome, String cpf) {
+		this(nome, cpf, null);		
 	}
 
 	public Integer getMatricula() {
