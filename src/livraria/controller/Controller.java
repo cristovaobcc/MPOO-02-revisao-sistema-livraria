@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import livraria.model.BaseDados;
+import livraria.model.Cliente;
 import livraria.model.Estoque;
 import livraria.model.Livro;
 import livraria.utils.Destructor;
@@ -59,27 +61,58 @@ public class Controller implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		TelaCadastro tela;
+		// Cadastramento de livro
 		if (isAcionadoAddButton(e) && 
 				((TelaCadastro) telaCadastro).getLivroRadioButton().isSelected()) {
 			
-			TelaCadastro tela = (TelaCadastro) telaCadastro;
-			Livro livro = carregaDadosPreenchidos(tela);
+			tela = (TelaCadastro) telaCadastro;
+			Livro livro = carregaDadosPreenchidosDeLivro(tela);
 			if(Validador.isLivroValido(livro) ) {
 				Estoque.addLivro(livro);
-				Destructor.destroy(livro);
-				JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso !");
+				JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
 			} else {
 				JOptionPane.showMessageDialog(null, "Erro ao cadastrar livro.");
 			}
-			// Códigos de testes:
-			System.out.println("********************");
-			String dados = Estoque.exibirDados();
-			System.out.println(dados);
+			Destructor.destroy(livro);
+			Destructor.destroy(tela);
 		}
+		// Cadastramento de cliente
+		if (isAcionadoAddButton(e) &&
+				((TelaCadastro) telaCadastro).getClienteRadioButton().isSelected()) {
+			tela = (TelaCadastro) telaCadastro;
+			Cliente cliente = carregaDadosPreenchidosDeCliente(tela);
+			if(Validador.isClienteValido(cliente)) {
+				BaseDados.addCliente(cliente);
+				JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso!");
+			} else {
+				JOptionPane.showMessageDialog(null,"Erro ao cadastrar cliente.");
+			}
+			Destructor.destroy(cliente);
+			Destructor.destroy(tela);
+			
+		}
+		
 		
 	}
 	
-	private Livro carregaDadosPreenchidos(TelaCadastro tela) {
+	
+	/**
+	 * Devolve um Cliente com os dados preenchidos da tela de cadastro de cliente.
+	 * @param tela {@link TelaCadastro}
+	 * @return {@link Cliente}
+	 */
+	private Cliente carregaDadosPreenchidosDeCliente(TelaCadastro tela) {
+		// TODO: pensar numa implementação para a gerar numero de matricula do cliente.
+		return new Cliente(tela.getNomeTextField().getText(), tela.getCpfTextField().getText(), null);
+	}
+	
+	/**
+	 * Devolve um Livro com os dados preenchidos da tela de cadastro de livros.
+	 * @param tela {@link TelaCadastro}
+	 * @return {@link Livro}
+	 */
+	private Livro carregaDadosPreenchidosDeLivro(TelaCadastro tela) {
 		return new Livro(tela.getIsbnTextField().getText(), 
 				tela.getTituloTextField().getText(), 
 				tela.getAutorTextField().getText(), 
@@ -87,6 +120,11 @@ public class Controller implements ActionListener {
 				false);	
 	}
 	
+	/**
+	 * Verifica se o botão acionado foi o AddButton da TelaCadastro.
+	 * @param e {@link ActionEvent}
+	 * @return boolean
+	 */
 	private boolean isAcionadoAddButton(ActionEvent e) {
 		if (e.getSource() == ((TelaCadastro) telaCadastro).getAddButton()) {
 			return true;
