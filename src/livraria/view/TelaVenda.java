@@ -54,7 +54,7 @@ public class TelaVenda extends Tela {
 		add(jPanel1);
 		add(jPanel2);
 		
-		setVisible(false);
+		setVisible(true);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		

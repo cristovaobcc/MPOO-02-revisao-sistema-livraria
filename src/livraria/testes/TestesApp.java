@@ -35,7 +35,9 @@ public class TestesApp {
 		TelaEstoque telaEstoque = new TelaEstoque(150, 150, "Estoque");
 		
 		Controller controller = new Controller(telaMenu, telaCadastro, telaVenda, telaEstoque);
-
+		
+		
+		
 	}
 	
 	private static void testeDeOutrosComponentesDoModel() {

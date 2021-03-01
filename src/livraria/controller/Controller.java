@@ -4,7 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
+import livraria.model.Estoque;
+import livraria.model.Livro;
+import livraria.utils.Destructor;
+import livraria.utils.Validador;
 import livraria.view.Tela;
 import livraria.view.TelaCadastro;
 import livraria.view.TelaVenda;
@@ -16,7 +21,7 @@ import livraria.view.TelaVenda;
  * @author Cristovao
  *
  */
-public class Controller implements ActionListener{
+public class Controller implements ActionListener {
 	
 	private Tela telaMenu,
 				telaCadastro,
@@ -53,12 +58,41 @@ public class Controller implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == ((TelaCadastro) telaCadastro).getAddButton()) {
-			System.out.println("Apertou o AddButton!");
+		
+		if (isAcionadoAddButton(e) && 
+				((TelaCadastro) telaCadastro).getLivroRadioButton().isSelected()) {
+			
+			TelaCadastro tela = (TelaCadastro) telaCadastro;
+			Livro livro = carregaDadosPreenchidos(tela);
+			if(Validador.isLivroValido(livro) ) {
+				Estoque.addLivro(livro);
+				Destructor.destroy(livro);
+				JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso !");
+			} else {
+				JOptionPane.showMessageDialog(null, "Erro ao cadastrar livro.");
+			}
+			// Códigos de testes:
+			System.out.println("********************");
+			String dados = Estoque.exibirDados();
+			System.out.println(dados);
 		}
 		
 	}
 	
+	private Livro carregaDadosPreenchidos(TelaCadastro tela) {
+		return new Livro(tela.getIsbnTextField().getText(), 
+				tela.getTituloTextField().getText(), 
+				tela.getAutorTextField().getText(), 
+				tela.getEditoraTextField().getText(), 
+				false);	
+	}
 	
+	private boolean isAcionadoAddButton(ActionEvent e) {
+		if (e.getSource() == ((TelaCadastro) telaCadastro).getAddButton()) {
+			return true;
+		}
+		
+		return false;
+	}
 
 }
