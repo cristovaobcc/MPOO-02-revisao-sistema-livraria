@@ -40,7 +40,7 @@ public class TelaEstoque extends Tela {
 		
 		add(scroll, BorderLayout.CENTER);
 		
-		setVisible(true);
+		setVisible(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	

@@ -2,6 +2,8 @@ package livraria.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -15,6 +17,7 @@ import livraria.utils.Destructor;
 import livraria.utils.Validador;
 import livraria.view.Tela;
 import livraria.view.TelaCadastro;
+import livraria.view.TelaMenu;
 import livraria.view.TelaVenda;
 
 /**
@@ -45,11 +48,50 @@ public class Controller implements ActionListener {
 		this.telaEstoque = telaEstoque;
 		
 		control();
+		configuraClasseInternaAnonima();
 		
 	}
 	
 	/**
-	 * Configura os eventListeners desta classe.
+	 * Configura os eventListeners com classes internas
+	 * anônimas.
+	 */
+	private void configuraClasseInternaAnonima() {
+		
+		TelaMenu telaM = (TelaMenu) telaMenu;
+		telaM.getCadastroButton().addActionListener(
+				new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						telaMenu.setVisible(false);
+						telaCadastro.setVisible(true);
+						
+					}
+				}
+				
+				);
+		
+		TelaCadastro telaCad = (TelaCadastro) telaCadastro;
+		telaCad.addWindowListener(
+				
+				new WindowAdapter() {
+
+					@Override
+					public void windowClosed(WindowEvent e) {
+						telaCadastro.setVisible(false);
+						telaMenu.setVisible(true);
+					}
+					
+				}
+				
+				);
+		
+	}
+
+	/**
+	 * Configura os eventListeners desta classe. 
+	 * 
 	 */
 	private void control() {
 		JButton button = ((TelaCadastro) telaCadastro).getAddButton();
@@ -58,7 +100,10 @@ public class Controller implements ActionListener {
 		button.addActionListener(this);
 		
 	}
-
+	
+	/**
+	 * Trata os eventos nesta classe.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {		
 		
@@ -169,5 +214,7 @@ public class Controller implements ActionListener {
 		
 		return false;
 	}
-
+	
+	
+	
 }

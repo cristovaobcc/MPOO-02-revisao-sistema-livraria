@@ -28,8 +28,7 @@ public class TestesApp {
 		Tela telaMenu = new TelaMenu(495, 75, "Menu");
 		
 		TelaCadastro telaCadastro = new TelaCadastro(240, 300, "Cadastro");
-		telaCadastro.setVisible(true);
-		
+				
 		TelaVenda telaVenda = new TelaVenda(180, 150, "Venda");
 		
 		TelaEstoque telaEstoque = new TelaEstoque(150, 150, "Estoque");

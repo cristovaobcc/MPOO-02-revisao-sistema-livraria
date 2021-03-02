@@ -89,7 +89,7 @@ public class TelaCadastro extends Tela {
 		add(clientePanel);
 		add(addButtonPanel);
 		
-		clientePanel.setVisible(true);
+		clientePanel.setVisible(false);
 		
 		setVisible(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
