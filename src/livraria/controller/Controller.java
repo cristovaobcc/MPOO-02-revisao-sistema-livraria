@@ -10,6 +10,7 @@ import livraria.model.BaseDados;
 import livraria.model.Cliente;
 import livraria.model.Estoque;
 import livraria.model.Livro;
+import livraria.model.Transacao;
 import livraria.utils.Destructor;
 import livraria.utils.Validador;
 import livraria.view.Tela;
@@ -59,15 +60,12 @@ public class Controller implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {		
 		
-		TelaCadastro tela;
 		// Cadastramento de livro
 		if (isAcionadoAddButton(e) && 
-				((TelaCadastro) telaCadastro).getLivroRadioButton().isSelected()) {
-			
-			tela = (TelaCadastro) telaCadastro;
-			Livro livro = carregaDadosPreenchidosDeLivro(tela);
+				((TelaCadastro) telaCadastro).getLivroRadioButton().isSelected()) {						
+			Livro livro = carregaDadosPreenchidosDeLivro(telaCadastro);
 			if(Validador.isLivroValido(livro) ) {
 				Estoque.addLivro(livro);
 				JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
@@ -75,13 +73,11 @@ public class Controller implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Erro ao cadastrar livro.");
 			}
 			Destructor.destroy(livro);
-			Destructor.destroy(tela);
 		}
 		// Cadastramento de cliente
-		if (isAcionadoAddButton(e) &&
+		else if (isAcionadoAddButton(e) &&
 				((TelaCadastro) telaCadastro).getClienteRadioButton().isSelected()) {
-			tela = (TelaCadastro) telaCadastro;
-			Cliente cliente = carregaDadosPreenchidosDeCliente(tela);
+			Cliente cliente = carregaDadosPreenchidosDeCliente(telaCadastro);
 			if(Validador.isClienteValido(cliente)) {
 				BaseDados.addCliente(cliente);
 				JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso!");
@@ -89,34 +85,76 @@ public class Controller implements ActionListener {
 				JOptionPane.showMessageDialog(null,"Erro ao cadastrar cliente.");
 			}
 			Destructor.destroy(cliente);
-			Destructor.destroy(tela);
+			
 			
 		}
+		else if (e.getSource() == ((TelaVenda) telaVenda).getConfirmarButton()) {
+			Livro livro = carregaDadosPreenchidosDeLivro(telaVenda);
+			Cliente cliente = carregaDadosPreenchidosDeCliente(telaVenda);
+			cliente = BaseDados.getCliente(cliente);
+			if (Estoque.existeLivro(livro) && cliente != null) {
+				livro = Estoque.buscarLivro(livro);
+				if (Transacao.venda(cliente, livro)) {
+					JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!");
+					Transacao.exibirTransacoes();
+				} else {
+					JOptionPane.showMessageDialog(null, "Erro ao realizar a venda");
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Erro ao realizar a venda");
+			}
+			
+			Destructor.destroy(cliente);
+			Destructor.destroy(livro);
+		}
 		
-		
+
 	}
 	
 	
 	/**
-	 * Devolve um Cliente com os dados preenchidos da tela de cadastro de cliente.
-	 * @param tela {@link TelaCadastro}
-	 * @return {@link Cliente}
+	 * Devolve um Cliente com os dados preenchidos da tela de cadastro de cliente ou tela de venda
+	 * de livro. Devolve null caso a tela passada não seja de cadastro ou de venda.
+	 * @param tela {@link Tela}
+	 * @return {@link Cliente} 
 	 */
-	private Cliente carregaDadosPreenchidosDeCliente(TelaCadastro tela) {
-		return new Cliente(tela.getNomeTextField().getText(), tela.getCpfTextField().getText());
+	private Cliente carregaDadosPreenchidosDeCliente(Tela tela) {
+		Cliente cliente;
+		if(tela instanceof TelaCadastro) {
+			TelaCadastro telaCad = (TelaCadastro) tela;
+			cliente = new Cliente(telaCad.getNomeTextField().getText(), telaCad.getCpfTextField().getText());
+			Destructor.destroy(telaCad);
+			return cliente;
+		} else if (tela instanceof TelaVenda) {
+			TelaVenda telaVenda = (TelaVenda) tela;
+			cliente = new Cliente(telaVenda.getCpfTextField().getText());
+			Destructor.destroy(telaVenda);
+			return cliente;
+			
+		}
+		return null;
 	}
 	
 	/**
-	 * Devolve um Livro com os dados preenchidos da tela de cadastro de livros.
-	 * @param tela {@link TelaCadastro}
+	 * Devolve um Livro com os dados preenchidos da tela de cadastro de livros ou tela de venda
+	 * de livro. Devolve null caso a tela passada não seja de cadastro ou de venda.
+	 * @param tela {@link Tela}
 	 * @return {@link Livro}
 	 */
-	private Livro carregaDadosPreenchidosDeLivro(TelaCadastro tela) {
-		return new Livro(tela.getIsbnTextField().getText(), 
-				tela.getTituloTextField().getText(), 
-				tela.getAutorTextField().getText(), 
-				tela.getEditoraTextField().getText(), 
-				false);	
+	private Livro carregaDadosPreenchidosDeLivro(Tela tela) {
+		if(tela instanceof TelaCadastro) {
+			TelaCadastro telaCad = (TelaCadastro) tela;
+			return new Livro(telaCad.getIsbnTextField().getText(), 
+					telaCad.getTituloTextField().getText(), 
+					telaCad.getAutorTextField().getText(), 
+					telaCad.getEditoraTextField().getText(), 
+					false);
+		}
+		else if (tela instanceof TelaVenda) {
+			TelaVenda telaVenda = (TelaVenda) tela;
+			return new Livro(telaVenda.getTituloTextField().getText(), telaVenda.getAutorTextField().getText());
+		}
+		return 	null;
 	}
 	
 	/**

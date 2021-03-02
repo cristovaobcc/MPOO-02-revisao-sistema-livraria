@@ -30,6 +30,17 @@ public class Transacao {
 		return false;
 	}
 	
+	/**
+	 * Devolve uma lista com todos os livros vendidos no formato abaixo:
+	 * 
+	 * Livro:\n
+	 * Titulo: [titulo]\n
+	 * Autor: [autor]\n
+	 * Editora: [editora]\n
+	 * ISBN: [isbn]\n
+	 * 
+	 * @return String
+	 */
 	public static String exibirTransacoes() {
 		
 		StringBuilder dadosSB = new StringBuilder();

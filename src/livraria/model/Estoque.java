@@ -28,8 +28,8 @@ public class Estoque {
 	}
 	
 	/**
-	 * Verifica se o livro passado como argumento existe no 
-	 * estoque.
+	 * Verifica se o livro(com o título e autor configurados) passado 
+	 * como argumento existe no estoque.
 	 * @param livro Livro
 	 * @return boolean true, se existe; false, do contrário.
 	 */
@@ -51,7 +51,8 @@ public class Estoque {
 	}
 	
 	/**
-	 * Devolve um livro buscado, caso exista. Do contrário, devolve null.
+	 * Devolve um livro buscado (com base no título e autor configurados),
+	 * caso exista. Do contrário, devolve null.
 	 * @param livro Livro buscado
 	 * @return Livro
 	 */

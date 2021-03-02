@@ -37,8 +37,9 @@ public class Livro {
 	
 	
 	/**
-	 * @param titulo
-	 * @param autor
+	 * Cria um objeto que representa um livro com titulo e autor passados.
+	 * @param titulo String
+	 * @param autor String
 	 */
 	public Livro(String titulo, String autor) {
 		this.titulo = titulo;
