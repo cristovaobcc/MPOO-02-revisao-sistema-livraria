@@ -17,6 +17,7 @@ import livraria.utils.Destructor;
 import livraria.utils.Validador;
 import livraria.view.Tela;
 import livraria.view.TelaCadastro;
+import livraria.view.TelaEstoque;
 import livraria.view.TelaMenu;
 import livraria.view.TelaVenda;
 
@@ -72,7 +73,78 @@ public class Controller implements ActionListener {
 				
 				);
 		
+		telaM.getVendaButton().addActionListener(
+				new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						telaMenu.setVisible(false);
+						telaVenda.setVisible(true);
+						
+					}
+					
+				}
+				);
+		
+		telaM.getConsultaButton().addActionListener(
+				new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						telaM.setVisible(true);
+						String dados = Estoque.exibirDados();
+						((TelaEstoque) telaEstoque).getInfoArea().setText(dados);
+						telaEstoque.setVisible(true);
+						
+					}
+					
+				}
+				
+				);
+		
+		telaM.getSairButton().addActionListener(
+				new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						System.exit(0);
+						
+					}
+					
+				}
+				
+				);
+		
 		TelaCadastro telaCad = (TelaCadastro) telaCadastro;
+		
+		telaCad.getLivroRadioButton().addActionListener(
+				new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (telaCad.getLivroRadioButton().isSelected()) {
+							telaCad.getClientePanel().setVisible(false);
+							telaCad.getLivroPanel().setVisible(true);
+						}						
+					}
+				}
+				);
+		
+		telaCad.getClienteRadioButton().addActionListener(
+				new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (telaCad.getClienteRadioButton().isSelected()) {
+							telaCad.getClientePanel().setVisible(true);
+							telaCad.getLivroPanel().setVisible(false);
+						}
+						
+					}
+				}
+				
+				);
+						
 		telaCad.addWindowListener(
 				
 				new WindowAdapter() {
@@ -87,6 +159,36 @@ public class Controller implements ActionListener {
 				
 				);
 		
+		TelaVenda telaVen = (TelaVenda) telaVenda;
+		telaVen.addWindowListener(
+				
+				new WindowAdapter() {
+
+					@Override
+					public void windowClosed(WindowEvent e) {
+						telaVenda.setVisible(false);
+						telaMenu.setVisible(true);
+					}
+					
+				}
+				
+				);
+		
+		TelaEstoque telaEst = (TelaEstoque) telaEstoque;
+		telaEst.addWindowListener(
+				
+				new WindowAdapter() {
+
+					@Override
+					public void windowClosed(WindowEvent e) {
+						telaEstoque.setVisible(false);
+						telaMenu.setVisible(true);
+					}
+					
+				}
+				
+				);
+
 	}
 
 	/**
@@ -109,7 +211,8 @@ public class Controller implements ActionListener {
 		
 		// Cadastramento de livro
 		if (isAcionadoAddButton(e) && 
-				((TelaCadastro) telaCadastro).getLivroRadioButton().isSelected()) {						
+				((TelaCadastro) telaCadastro).getLivroRadioButton().isSelected()) {
+			
 			Livro livro = carregaDadosPreenchidosDeLivro(telaCadastro);
 			if(Validador.isLivroValido(livro) ) {
 				Estoque.addLivro(livro);
@@ -122,6 +225,7 @@ public class Controller implements ActionListener {
 		// Cadastramento de cliente
 		else if (isAcionadoAddButton(e) &&
 				((TelaCadastro) telaCadastro).getClienteRadioButton().isSelected()) {
+			
 			Cliente cliente = carregaDadosPreenchidosDeCliente(telaCadastro);
 			if(Validador.isClienteValido(cliente)) {
 				BaseDados.addCliente(cliente);

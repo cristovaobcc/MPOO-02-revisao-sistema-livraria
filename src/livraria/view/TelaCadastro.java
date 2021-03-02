@@ -191,6 +191,20 @@ public class TelaCadastro extends Tela {
 		return addButton;
 	}
 
+	/**
+	 * @return the livroPanel
+	 */
+	public JPanel getLivroPanel() {
+		return livroPanel;
+	}
+
+	/**
+	 * @return the clientePanel
+	 */
+	public JPanel getClientePanel() {
+		return clientePanel;
+	}
+
 		
 	
 }

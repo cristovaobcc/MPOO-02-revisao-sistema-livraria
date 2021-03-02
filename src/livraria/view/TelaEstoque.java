@@ -43,6 +43,13 @@ public class TelaEstoque extends Tela {
 		setVisible(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
+
+	/**
+	 * @return the infoArea
+	 */
+	public JTextArea getInfoArea() {
+		return infoArea;
+	}
 	
 	
 	
