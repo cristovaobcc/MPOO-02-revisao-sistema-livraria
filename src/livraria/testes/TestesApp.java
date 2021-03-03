@@ -21,7 +21,7 @@ public class TestesApp {
 
 
 	@SuppressWarnings("unused")
-	public static void main(String[] args) {
+	public static void mainDeTeste(String[] args) {
 		testeDeLivroEEstoque();
 		testeDeOutrosComponentesDoModel();
 		
